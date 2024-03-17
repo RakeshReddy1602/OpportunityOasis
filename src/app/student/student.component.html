@@ -1,0 +1,31 @@
+<!-- student-dashboard.component.html -->
+<div class="bg-gradient-to-br from-purple-400 to-indigo-600 min-h-screen flex items-center justify-center">
+    <div class="max-w-6xl mx-auto py-6 px-4 text-white text-center">
+      <h1 class="text-4xl font-bold mb-6">Welcome back, <span class="text-blue-200"></span>!</h1>
+  
+      <!-- Job Search -->
+      <div class="mb-8">
+        <button class="text-2xl w-full font-bold mb-4 bg-yellow-400 rounded p-2 text-black"
+        (click)="navToApplyJobs()"
+        >Find Jobs</button>
+        <!-- Job listings -->
+      </div>
+  
+      <!-- My Applications -->
+      <div class="mb-8">
+        <button class="text-2xl w-full font-bold mb-4 bg-yellow-400 rounded p-2 text-black"
+        (click)="navToApplications()"
+        >My Applications</button>
+        <!-- Application list -->
+      </div>
+  
+      <!-- Account Management -->
+      <div class="mb-8">
+        <button class="text-2xl w-full font-bold mb-4 bg-yellow-400 rounded p-2 text-black"
+        (click)="navToWorkLog()"
+        >Work History</button>
+        <!-- Account links -->
+      </div>
+    </div>
+  </div>
+  
