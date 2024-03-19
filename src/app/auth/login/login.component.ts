@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit{
   loginForm! : FormGroup;
   registerForm! : FormGroup;
   path:string= '';
-  passwordPatttern : RegExp = /[*]/;
   isValidUser : boolean = true;
   studentList : student[] = [];
   vendorList : vendor[] = [];
@@ -50,15 +49,24 @@ export class LoginComponent implements OnInit{
     let password = this.loginForm.get('password')!.value;
 
     if(id.length == 6){
-      this.isValidUser = this.validateVendor(id,password);
-      if(this.isValidUser){
+      let vendor = this.validateVendor(id,password);
+      if(vendor == null){
+        this.isValidUser = false;
+      }
+      else{
+        this.isValidUser = true;
+        localStorage.setItem('vendor',JSON.stringify(vendor));
         localStorage.setItem('isStudent','false');
         this.router.navigate(['vendor-dashboard']);
       }
     }
     else{
-      this.isValidUser = this.validateStudent(id,password);
-      if(this.isValidUser){
+      let student = this.validateStudent(id,password);
+      if(student == null){
+        this.isValidUser = false;
+      }
+      else{
+        localStorage.setItem('student',JSON.stringify(student));
         localStorage.setItem('isStudent','true');
         this.router.navigate(['student-dashboard']);
       }
@@ -75,21 +83,18 @@ export class LoginComponent implements OnInit{
     return id.length != 6 && id.length != 8;
   }
 
-  validateStudent(id:number,password:string):boolean{
+  validateStudent(id:number,password:string):any{
     let currStudent = this.studentList.find((s)=>{
-      console.log(s.regNumber);
-      console.log(s.password);
       return s.regNumber == id && s.password == password;
     });
-    console.log(currStudent);
-    return currStudent != undefined;
+    return currStudent;
   }
 
-  validateVendor(id:number,password:string):boolean{
+  validateVendor(id:number,password:string):any{
     let currVendor = this.vendorList.find((v)=>{
       return v.vendorId == id && v.password == password;
     });
-    return currVendor != undefined;
+    return currVendor;
   }
 
 }

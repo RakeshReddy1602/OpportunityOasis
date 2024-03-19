@@ -37,11 +37,11 @@ export class RegStudentComponent implements OnInit{
         this.studentList= JSON.parse(storedStuList);
       }
 
-      localStorage.setItem('isStudent','true')
   }
 
   register(){
     if(this.addStudent()){
+      localStorage.setItem('isStudent','true')
       this.router.navigate(['/student-dashboard']);
     }
   }
