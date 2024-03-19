@@ -1,0 +1,49 @@
+<div   class="min-h-screen flex flex-col items-center justify-center content">
+    <div>
+        <h1 class="text-3xl font-bold mx-16 my-4">OppurtunityOasis</h1>
+    </div>
+    <div>
+        <div *ngIf="showLoginForm" >
+          <div class="border-2 border-black rounded px-4 py-8">
+            <h2 class="text-lg font-bold mb-4">Login</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="mb-8 ">
+              <div class="mb-4">
+                <label for="registrationNumber" class="block mb-2">Registration Number/Vendor Id:</label>
+                <input type="text" id="registrationNumber" formControlName="regNumber"  class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                <p class="warning" *ngIf="isInvalidId() || (loginForm.get('regNumber')!.invalid && loginForm.get('regNumber')!.touched)">Please Enter a valid UMS ID </p>
+              </div>
+              <div class="mb-4">
+                <label for="password" class="block mb-2">Password:</label>
+                <input type="password" id="password" formControlName="password" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                <p *ngIf="!isValidUser" class="warning">Invalid Credentials</p>
+              </div>
+              <button type="submit"  [disabled]="loginForm.invalid || isInvalidId()" [ngClass]="{'disabled' : loginForm.invalid,'enabled' :loginForm.valid}"
+               class="w-full text-white font-bold py-2 px-4 rounded">Login</button>
+            </form>
+            <p class="mb-4">Don't have an account? <a href="#" (click)="toggleForm()" class="text-blue-500">Register with us</a></p>
+          </div>
+      
+        </div>
+      </div>
+      
+      <div *ngIf="!showLoginForm" class="w-96">
+       <div class="border-2 border-black px-4 py-2">
+        <h2 class="text-xl font-bold m-4 text-center">Register</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="register()" class="mb-8">
+          <div class="mb-4">
+            <label for="userType" class="block mb-2">User Type:</label>
+            <select id="userType" formControlName="userType" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+              <option value="" disabled selected>Select User Type</option>
+              <option value="student">Student</option>
+              <option value="vendor">Vendor</option>
+            </select>
+          </div>
+         
+         
+          <button type="submit" [disabled]="registerForm.invalid" [ngClass]="{'disabled' : registerForm.invalid,'enabled' :registerForm.valid}"
+           class="w-full text-white font-bold py-2 px-4 rounded">Proceed</button>
+        </form>
+       </div>
+        <p class="mb-4">Already have an account? <a href="#" (click)="toggleForm()" class="text-blue-500">Login</a></p>
+      </div>
+</div>

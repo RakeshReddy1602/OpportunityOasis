@@ -1,0 +1,89 @@
+<!-- vendor-registration.component.html -->
+<div class="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h2 class="text-xl font-bold mb-4">Vendor Registration</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="submit()">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="vendorId">
+          Vendor ID
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+        id="vendorId" type="text" placeholder="Enter vendor ID"
+        formControlName="vendorId">
+        <p *ngIf="alreadyExist" class="warning">Vendor with ID already exist</p>
+        <p class="warning" *ngIf="registerForm.get('vendorId')!.touched && registerForm.get('vendorId')!.invalid" class="warning">Vendor ID must be 6 numbers</p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="vendorName">
+          Vendor Name
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="vendorName" type="text" placeholder="Enter vendor name"
+        formControlName="vendorName">
+        <p class="warning" *ngIf="registerForm.get('vendorName')!.touched && registerForm.get('vendorName')!.invalid" class="warning">Vendor's Name is Required</p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="shopName">
+          Business Name
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="shopName" type="text" placeholder="Enter business name"
+        formControlName="shopName">
+        <p class="warning" *ngIf="registerForm.get('shopName')!.touched && registerForm.get('shopName')!.invalid" class="warning">Shop Name is Required</p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="shopAddress">
+          Business Address
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="shopAddress" type="text" placeholder="Enter business address"
+        formControlName="shopAddress">
+        <p class="warning" *ngIf="registerForm.get('shopAddress')!.touched && registerForm.get('shopAddress')!.invalid" class="warning">Shop Address is Required</p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="mobile">
+          Mobile
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="mobile" type="text" placeholder="Enter mobile number"
+        formControlName="mobile">
+        <p class="warning" *ngIf="registerForm.get('mobile')!.touched && registerForm.get('mobile')!.invalid" class="warning">Enter a valid mobile number</p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+          Email
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+        id="email" type="email" placeholder="Enter email"
+        formControlName="email">
+        <p class="warning" *ngIf="registerForm.get('email')!.touched && registerForm.get('email')!.invalid" class="warning">Enter a valid email</p>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+          Password
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+        id="password" type="password" placeholder="Enter password"
+        formControlName="entryPassword">
+        <p class="warning" *ngIf="registerForm.get('entryPassword')!.touched && registerForm.get('entryPassword')!.invalid" class="warning">
+          Password must be 8-20 characters long and must have 1 uppercase, 1 lowercase, 1 number, 1 special character
+        </p>
+      </div>
+      <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="confirmPassword">
+          Confirm Password
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="confirmPassword" type="password" placeholder="Confirm password"
+        formControlName="confirmPassword">
+        <p *ngIf="registerForm.get('confirmPassword')?.touched && passwordNotMatch()" class="warning">Password does not match</p>
+      </div>
+      <div class="flex flex-col items-center justify-between">
+        <p *ngIf="(registerForm.touched && registerForm.invalid) || alreadyExist" class="warning">Enter the details in the corrrect format</p>
+        <button class=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit"
+        [disabled]="registerForm.invalid" [ngClass]="{'disabled' : registerForm.invalid,'enabled' :registerForm.valid}">
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+  

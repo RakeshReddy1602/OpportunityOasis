@@ -1,0 +1,25 @@
+<div class="min-h-screen">
+    <app-header></app-header>
+    <!-- Iterate over the list of applications -->
+<div *ngFor="let application of myApplications" class="application border rounded-md p-4 mb-4 shadow-md">
+    <!-- Display application details -->
+    <div class="application-details mb-2">
+        <p><strong class="text-lg">{{ application.jobTitlle }}</strong></p>
+        <p><strong>Vendor Name:</strong> {{ application.vendorName }}</p>
+        <p><strong>Time:</strong> {{ application.time | date }}</p>
+        <p><strong>Status:</strong> {{ application.status }}</p>
+        <p><strong>Registration Number:</strong> {{ application.regNumber }}</p>
+    </div>
+
+    <!-- Buttons for accepting or rejecting the application -->
+    <div class="action-buttons flex justify-between items-center">
+        <button (click)="accept(application)" class="accept-button bg-green-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300">
+            Accept
+        </button>
+        <button (click)="reject(application)" class="reject-button bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
+            Reject
+        </button>
+    </div>
+</div>
+
+</div>

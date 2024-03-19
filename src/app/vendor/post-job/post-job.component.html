@@ -1,0 +1,64 @@
+<div class="min-h-screen">
+  <app-header></app-header>
+  <!-- post-job.component.html -->
+<div class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg">
+  <h2 class="text-2xl font-bold mb-4 text-center">Post a Job</h2>
+  
+  <form [formGroup]="jobPostForm" (ngSubmit)="postJob()">
+    <div class="mb-4">
+      <label for="name" class="block text-gray-700 font-semibold mb-2">Job Id <sub>(fixed)</sub>
+      </label>
+      <input type="text" id="name" name="name" [disabled]="true" [(ngModel)] = "jobId" [ngModelOptions]={standalone:true}
+      class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+    </div>
+    <div class="mb-4">
+      <label for="name" class="block text-gray-700 font-semibold mb-2">Job Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter job name" formControlName="name"
+      class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+      <p class="warning" *ngIf="jobPostForm.get('name')!.touched && jobPostForm.get('name')!.invalid">Job Name must have 4 characters</p>
+    </div>
+    
+    <div class="mb-4">
+      <label for="description" class="block text-gray-700 font-semibold mb-2">Description:</label>
+      <textarea id="description" name="description" placeholder="Enter job description" rows="4" formControlName="description"
+      class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required></textarea>
+      <p class="warning" *ngIf="jobPostForm.get('description')!.touched && jobPostForm.get('description')!.invalid">Job Description must have atleast 6 charcaters</p>
+    </div>
+    
+    <div class="mb-4">
+      <label for="contact" class="block text-gray-700 font-semibold mb-2">Contact:</label>
+      <input type="text" id="contact" name="contact" placeholder="Enter contact information" formControlName="contact"
+      class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+      <p class="warning" *ngIf="jobPostForm.get('contact')!.touched && jobPostForm.get('contact')!.invalid">CEnter a valid mobile number</p>
+    </div>
+    
+    <div class="mb-4">
+      <label for="email" class="block text-gray-700 font-semibold mb-2">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter email address" formControlName="email"
+      class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+      <p class="warning" *ngIf="jobPostForm.get('email')!.touched && jobPostForm.get('email')!.invalid">Enter a valid email</p>
+    </div>
+    
+    <div class="mb-4">
+      <label for="duration" class="block text-gray-700 font-semibold mb-2">Duration (in hours):</label>
+      <input type="number" id="duration" name="duration" placeholder="Enter job duration" formControlName="duration"
+      class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+      <p class="warning" *ngIf="jobPostForm.get('duration')!.touched && jobPostForm.get('duration')!.invalid">Job Name is required</p>
+    </div>
+
+    <div class="mb-4">
+      <label for="skills" class="block text-gray-700 font-semibold mb-2">Required Skills(NA if not required)</label>
+      <input type="text" id="skills" name="skills" placeholder="Enter preferred skills" formControlName="skills"
+      class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+      <p class="warning" *ngIf="jobPostForm.get('skills')!.touched && jobPostForm.get('skills')!.invalid">Skills are required</p>
+    </div>
+    
+    <div class="flex flex-col mt-6">
+      <p *ngIf="jobPostForm.touched && jobPostForm.invalid">Fill the details in correct format</p>
+      <button type="submit" [disabled]="jobPostForm.invalid" [ngClass]="{'disabled' : jobPostForm.invalid,'enabled' :jobPostForm.valid}"
+      class="text-white font-semibold px-4 py-2 rounded focus:outline-none focus:bg-blue-600">Post Job</button>
+    </div>
+  </form>
+</div>
+
+</div>

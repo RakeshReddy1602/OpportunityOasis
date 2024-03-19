@@ -1,0 +1,19 @@
+<div class="min-h-screen">
+    <app-header></app-header>
+<!-- Iterate over the list of applications -->
+<div *ngFor="let application of myApplications" class="application bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-md p-6 mb-6">
+    <!-- Application details -->
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h2 class="text-2xl font-semibold text-white">{{ application.jobTitlle }}</h2>
+            <p class="text-sm text-white">{{ application.vendorName }}</p>
+            <p class="text-sm text-white">Time: {{ application.time | date }}</p>
+            <p class="text-sm text-white">Registration Number: {{ application.regNumber }}</p>
+        </div>
+        <span class="text-sm text-white">{{ application.status }}</span>
+    </div>
+
+   
+</div>
+
+</div>

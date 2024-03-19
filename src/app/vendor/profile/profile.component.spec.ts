@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WorklogComponent } from './worklog.component';
+import { ProfileComponent } from './profile.component';
 
-describe('WorklogComponent', () => {
-  let component: WorklogComponent;
-  let fixture: ComponentFixture<WorklogComponent>;
+describe('ProfileComponent', () => {
+  let component: ProfileComponent;
+  let fixture: ComponentFixture<ProfileComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [WorklogComponent]
+      declarations: [ProfileComponent]
     });
-    fixture = TestBed.createComponent(WorklogComponent);
+    fixture = TestBed.createComponent(ProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

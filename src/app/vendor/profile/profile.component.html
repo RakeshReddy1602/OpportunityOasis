@@ -1,0 +1,60 @@
+<div class="min-h-screen">
+  <app-header></app-header>
+  <!-- vendor-profile.component.html -->
+<h2 class="text-3xl font-bold m-4 text-center">Vendor Profile</h2>
+<form [formGroup]="detailsForm">
+  <div class="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="vendorId">
+        Vendor ID <sub>(fixed)</sub>
+      </label>
+      <input [disabled]="true"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="vendorId" type="text" [readonly]="!editable" formControlName="vendorId">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="vendorName">
+        Vendor Name
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="vendorName" type="text" placeholder="Vendor Name" [readonly]="!editable" formControlName ="name">
+      <p class="warning" *ngIf="detailsForm.get('name')!.touched && detailsForm.get('name')!.invalid" class="warning">Vendor's Name is Required</p>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="businessName">
+        Business Name
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="businessName" type="text" placeholder="Business Name" [readonly]="!editable"  formControlName ="shopName">
+      <p class="warning" *ngIf="detailsForm.get('shopName')!.touched && detailsForm.get('shopName')!.invalid" class="warning">Shop Name is Required</p>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="businessAddress">
+        Business Address
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="businessAddress" type="text" placeholder="Business Address" [readonly]="!editable"  formControlName ="shopAddress">
+      <p class="warning" *ngIf="detailsForm.get('shopAddress')!.touched && detailsForm.get('shopAddress')!.invalid" class="warning">Shop Address is Required</p>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="mobile">
+        Mobile
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="mobile" type="text" placeholder="Mobile" [readonly]="!editable"  formControlName ="mobile">
+      <p class="warning" *ngIf="detailsForm.get('mobile')!.touched && detailsForm.get('mobile')!.invalid" class="warning">Enter a valid mobile number</p>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+        Email
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="email" type="email" placeholder="Email" [readonly]="!editable"  formControlName ="email">
+      <p class="warning" *ngIf="detailsForm.get('email')!.touched && detailsForm.get('email')!.invalid" class="warning">Enter a valid email</p>
+    </div>
+    <div class="flex items-center justify-between">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" (click)="toggleEdit()">{{ editable ? 'Save' : 'Edit' }}</button>
+    </div>
+  </div>
+</form>
+  
+</div>

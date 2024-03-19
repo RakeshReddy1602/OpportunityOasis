@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'ngx-toastr/toastr';
+.disabled{
+    background-color: rgb(212, 229, 244);
+}
+.enabled{
+    background-color: blue;
+}
+.warning{
+    color: red;
+    font-size: small;
+    font-weight: 600;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

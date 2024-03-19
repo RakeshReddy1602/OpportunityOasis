@@ -1,1 +1,38 @@
-<p>student-app works!</p>
+<div class="min-h-screen">
+  <app-header></app-header>
+  <!-- list-applications.component.html -->
+<div class="max-w-6xl mx-auto py-6 px-4">
+  <h2 class="text-3xl font-bold mb-6">Applications</h2>
+  
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full border-collapse">
+      <thead>
+        <tr>
+          <th class="px-4 py-2 bg-gray-200 text-gray-600">Job ID</th>
+          <th class="px-4 py-2 bg-gray-200 text-gray-600">Job Title</th>
+          <th class="px-4 py-2 bg-gray-200 text-gray-600">Vendor Name</th>
+          <th class="px-4 py-2 bg-gray-200 text-gray-600">Time</th>
+          <th class="px-4 py-2 bg-gray-200 text-gray-600">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Application rows -->
+        <tr *ngFor="let application of applicationList">
+          <td class="border px-4 py-2">{{ application.jobId }}</td>
+          <td class="border px-4 py-2">{{ application.jobTitlle }}</td>
+          <td class="border px-4 py-2">{{ application.vendorName }}</td>
+          <td class="border px-4 py-2">{{ application.time | date: 'medium' }}</td>
+          <td class="border px-4 py-2">{{ application.status }}</td>
+          <td class="border px-4 py-2">
+            <button class="p-2 bg-red-700 rounded" (click)="withdraw(application.jobId)"
+                    [disabled] = "canWithDraw(application.status)">
+              Withdraw
+            </button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+</div>
