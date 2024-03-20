@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { vendor } from 'src/app/Vendor.interface';
+import { RegexService } from 'src/app/regex.service';
 
 @Component({
   selector: 'app-reg-vendor',
@@ -11,11 +12,9 @@ import { vendor } from 'src/app/Vendor.interface';
 export class RegVendorComponent implements OnInit{
   registerForm! : FormGroup;
   alreadyExist:boolean = false;
-  mobileRegex = /^[6-9]\d{9}$/;
-  emailRegex : RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  passwordRegex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
   vendorList : vendor[]= [];
-  constructor(private router:Router){     }
+  constructor(private router:Router,private rserviec:RegexService){     }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -23,9 +22,9 @@ export class RegVendorComponent implements OnInit{
       vendorName : new FormControl('',[Validators.required]),
       shopName : new FormControl('',[Validators.required]),
       shopAddress : new FormControl('',[Validators.required]),
-      mobile : new FormControl('',[Validators.required,Validators.pattern(this.mobileRegex)]),
-      email : new FormControl('',[Validators.required,Validators.pattern(this.emailRegex)]),
-      entryPassword : new FormControl('',[Validators.required,Validators.maxLength(20),Validators.pattern(this.passwordRegex)]),
+      mobile : new FormControl('',[Validators.required,Validators.pattern(this.rserviec.mobileRegex)]),
+      email : new FormControl('',[Validators.required,Validators.pattern(this.rserviec.emailRegex)]),
+      entryPassword : new FormControl('',[Validators.required,Validators.maxLength(20),Validators.pattern(this.rserviec.passwordRegex)]),
       confirmPassword : new FormControl('',[Validators.required,Validators.maxLength(20)]),
     });
 

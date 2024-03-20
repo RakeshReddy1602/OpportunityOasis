@@ -16,9 +16,13 @@ import { ContactComponent } from './contact/contact.component';
 import { ResultsComponent } from './student/results/results.component';
 import { SelectedStudentsComponent } from './vendor/selected-students/selected-students.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { OpenJobsComponent } from './vendor/open-jobs/open-jobs.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
+  {path:'**',component:LoginComponent},
+  {path:'login',component:LoginComponent},
   {path:'reg-student',component:RegStudentComponent},
   {path:'reg-vendor',component:RegVendorComponent},
   {path:'student-dashboard',component:StudentComponent},
@@ -34,6 +38,8 @@ const routes: Routes = [
   {path:'results',component:ResultsComponent},
   {path:'selected-students',component:SelectedStudentsComponent},
   {path:'about-us',component:AboutUsComponent},
+  {path:'open-jobs',component:OpenJobsComponent},
+  {path:'reset-password',component:ResetPasswordComponent},
   
 ];
 

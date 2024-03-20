@@ -22,7 +22,7 @@ export class RegStudentComponent implements OnInit{
 
   ngOnInit(): void {
       this.registerForm = new FormGroup({
-        regNumber : new FormControl('',[Validators.required,Validators.minLength(8),Validators.maxLength(8)]),
+        regNumber : new FormControl('',[Validators.required,Validators.min(10000000),Validators.max(99999999)]),
         name : new FormControl('',[Validators.required]),
         mobile : new FormControl('',[Validators.required,Validators.pattern(this.mobileRegex)]),
         email : new FormControl('',[Validators.required,Validators.email,Validators.pattern(this.emailRegex)]),

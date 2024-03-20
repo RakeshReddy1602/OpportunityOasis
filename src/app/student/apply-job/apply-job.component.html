@@ -1,27 +1,39 @@
-<div>
+<div class="min-h-screen content">
   <app-header></app-header>
+  <div *ngIf="jobList.length == 0">
+    <!-- no-job-openings.component.html -->
+<div class=" flex justify-center h-screen">
+  <div class=" p-8 rounded-lg shadow-md">
+      <h1 class="text-2xl font-bold mb-4">No Job Openings Currently</h1>
+      <p class="text-gray-700">We're sorry, but there are currently no job openings available. Please check back later for updates.</p>
+  </div>
+</div>
+
+  </div>
   <!-- find-jobs.component.html -->
-<div class="max-w-6xl mx-auto py-6 px-4">
-  <h2 class="text-3xl font-bold mb-6">Find Jobs</h2>
+<div *ngIf="jobList.length > 0" class="max-w-6xl mx-auto py-6 px-4">
+  <h2 class="text-3xl font-medium mb-6 text-center">Find Jobs</h2>
   
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <!-- Job Cards -->
     <div *ngFor="let job of jobList" class="bg-white shadow-md rounded-lg p-6">
-      <h3 class="text-xl font-semibold mb-2">{{ job.name }}</h3>
+      <h3 class="text-xl font-semiboldmb-2">{{ job.name }}</h3>
       <p class="text-gray-700 mb-4">{{ job.description }}</p>
-      <p class="text-gray-600 mb-2">Shop Name: {{ job.shopName }}</p>
-      <p class="text-gray-600 mb-2">Location: {{ job.shopAddress }}</p>
-      <p class="text-gray-600 mb-2">Duration(in hours): {{ job.duration }}</p>
-      <p class="text-gray-600 mb-2">Contact: {{ job.contact }}</p>
-      <p class="text-gray-600 mb-4">Email: {{ job.email }}</p>
-      <p class="text-gray-600 mb-4">Preferred Skills: {{ job.skills }}</p>
+      <p class=" mb-2">Shop Name: {{ job.shopName }}</p>
+      <p class=" mb-2">Location: {{ job.shopAddress }}</p>
+      <p class=" mb-2">Contact: {{ job.contact }}</p>
+      <p class=" mb-4">Email: {{ job.email }}</p>
+      <p class=" mb-4">Preferred Skills: {{ job.skills }}</p>
+      <p class=" mb-4">Start Time: {{ job.startTime }}</p>
+      <p class=" mb-2">Duration(in hours): {{ job.duration }}</p>
+      <p class=" mb-4">Salary: {{ job.salary }}</p>
      <div *ngIf="!alraedyApplied(job.id)">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       (click)="updateApplications(job)"
       >Apply</button>
      </div>
      <div *ngIf="alraedyApplied(job.id)">
-      <button disabled ="true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      <button disabled ="true" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       (click)="updateApplications(job)"
       >Already Applied</button>
      </div>

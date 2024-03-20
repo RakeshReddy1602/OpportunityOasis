@@ -1,4 +1,4 @@
-<div class="min-h-screen">
+<div class="min-h-screen content">
   <app-header></app-header>
   <!-- vendor-profile.component.html -->
 <h2 class="text-3xl font-bold m-4 text-center">Vendor Profile</h2>
@@ -51,8 +51,9 @@
       id="email" type="email" placeholder="Email" [readonly]="!editable"  formControlName ="email">
       <p class="warning" *ngIf="detailsForm.get('email')!.touched && detailsForm.get('email')!.invalid" class="warning">Enter a valid email</p>
     </div>
-    <div class="flex items-center justify-between">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" (click)="toggleEdit()">{{ editable ? 'Save' : 'Edit' }}</button>
+    <div class="flex flex-col items-center justify-between">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" (click)="toggleEdit()">{{ editable ? 'Save' : 'Edit' }}</button>
+      <a routerLink="/reset-password" class="m-4 text-purple-700">Reset Password</a>
     </div>
   </div>
 </form>

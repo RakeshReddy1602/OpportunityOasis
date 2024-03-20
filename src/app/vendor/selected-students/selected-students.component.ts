@@ -28,7 +28,7 @@ export class SelectedStudentsComponent implements OnInit{
 
   getMyApplications(){
     this.applicationList.forEach((app)=>{
-      console.log(app.vendorId +" "+this.vendor.vendorId)
+      // console.log(app.vendorId +" "+this.vendor.vendorId)
       if(app.vendorId == this.vendor.vendorId && app.status == 'Accepted'){
         this.myApplications.push(app);
       }

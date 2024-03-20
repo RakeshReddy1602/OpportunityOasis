@@ -30,6 +30,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResultsComponent } from './student/results/results.component';
 import { SelectedStudentsComponent } from './vendor/selected-students/selected-students.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { OpenJobsComponent } from './vendor/open-jobs/open-jobs.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ResultsComponent,
     SelectedStudentsComponent,
     AboutUsComponent,
+    OpenJobsComponent,
+    ResetPasswordComponent,
 
   ],
   imports: [
@@ -69,7 +74,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ToastrModule.forRoot(),
     
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

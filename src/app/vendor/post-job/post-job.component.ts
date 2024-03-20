@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { job } from 'src/app/Job.interface';
 import { vendor } from 'src/app/Vendor.interface';
+import { ToastService } from 'src/app/toast.service';
 
 @Component({
   selector: 'app-post-job',
@@ -17,15 +18,18 @@ export class PostJobComponent implements OnInit{
   mobileRegex = /^[6-9]\d{9}$/;
   emailRegex : RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-
+  constructor(private tservice:ToastService){}
+  
   ngOnInit(): void {
     this.jobPostForm = new FormGroup({
       name : new FormControl('',[Validators.required,Validators.minLength(4)]),
       description : new FormControl('',[Validators.required,Validators.minLength(6)]),
       contact : new FormControl('',[Validators.required,Validators.pattern(this.mobileRegex)]),
       email : new FormControl('',[Validators.required,Validators.pattern(this.emailRegex)]),
-      duration : new FormControl(0,[Validators.required]),
-      skills : new FormControl('',[Validators.required])
+      duration : new FormControl(0,[Validators.required,Validators.min(1)]),
+      skills : new FormControl('',[Validators.required]),
+      salary: new FormControl(0,[Validators.required,Validators.min(0)]),
+      startTime : new FormControl('',[Validators.required])
     })
 
     let storedJobList = localStorage.getItem('jobList');
@@ -50,16 +54,15 @@ export class PostJobComponent implements OnInit{
     let email = this.jobPostForm.get('email')!.value;
     let duration = this.jobPostForm.get('duration')!.value;
     let skills = this.jobPostForm.get('skills')!.value;
-    let time = new Date();
+    let time = this.jobPostForm.get('startTime')!.value;
     let vendorId : number = this.vendor.vendorId;
-    time.setHours(18);
-    console.log("type res "+vendorId);
-    console.log(vendorId);
-    let newJob ={id:this.jobId,vendorId:vendorId,name:name,description:description,contact:contact,email:email,duration:duration,shopAddress:this.vendor.businessAddress,shopName:this.vendor.businessName,skills:skills,salary:6000,startTime:time};
+    let salary : number = this.jobPostForm.get('salary')!.value;
+    let newJob ={id:this.jobId,vendorId:vendorId,name:name,description:description,contact:contact,email:email,duration:duration,shopAddress:this.vendor.businessAddress,shopName:this.vendor.businessName,skills:skills,salary:salary,startTime:time};
     this.jobList.push(newJob);
     localStorage.setItem('jobList',JSON.stringify(this.jobList));
     this.jobId++
     localStorage.setItem('jobId',JSON.stringify(this.jobId));
+    this.tservice.showSuccess('Success','Job Posted Succesfully');
     this.jobPostForm.reset();
   }
 

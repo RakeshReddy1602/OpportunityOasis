@@ -16,6 +16,8 @@ export class HeaderComponent implements OnInit{
       if(storedIsStudent != null){
         this.isStudent = JSON.parse(storedIsStudent);
       }
+      console.log("user type");
+      console.log(this.isStudent);
       if(this.isStudent){
         this.profilePath = '/student-profile';
         this.dashboardPath = '/student-dashboard';

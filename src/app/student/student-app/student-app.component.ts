@@ -11,22 +11,28 @@ import { ToastService } from 'src/app/toast.service';
 })
 export class StudentAppComponent {
   applicationList : application[] = [];
+  myApplicationList : application[] = [];
   student! :student;
 
   constructor(private dservice:DialogServiceService,private tservice:ToastService){}
 
   ngOnInit(): void {
-    let storedAppData = localStorage.getItem('applicationList');
-    if(storedAppData !== null){
-      this.applicationList = JSON.parse(storedAppData);
-    }
 
     let storedStudent = localStorage.getItem('student');
     if(storedStudent !== null){
       this.student = JSON.parse(storedStudent);
     }
-
-
+    
+    let storedAppData = localStorage.getItem('applicationList');
+    if(storedAppData !== null){
+      this.applicationList = JSON.parse(storedAppData);
+      this.applicationList.forEach((app)=>{
+        console.log(app.regNumber);
+        if(app.regNumber == this.student.regNumber){
+          this.myApplicationList.push(app);
+        }
+      })
+    }
 
   }
 
@@ -36,13 +42,16 @@ export class StudentAppComponent {
         this.applicationList = this.applicationList.filter((app)=>{
           return (app.jobId != jobId || app.regNumber != this.student.regNumber);
          });
+        this.myApplicationList = this.myApplicationList.filter((app)=>{
+          return (app.jobId != jobId);
+         });
          localStorage.setItem('applicationList',JSON.stringify(this.applicationList));
-         this.tservice.showWarning('Applicaiton withdrawn','Success')
+         this.tservice.showSuccess('Success','Applicaiton withdrawn')
       }
     })
   }
 
   canWithDraw(status:string):boolean{
-    return status != 'Pending';
+    return status == 'Pending';
   }
 }

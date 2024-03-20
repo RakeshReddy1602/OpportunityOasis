@@ -1,7 +1,7 @@
-<div class="min-h-screen">
+<div class="min-h-screen content">
   <app-header></app-header>
   <!-- student-profile.component.html -->
-<h2 class="text-3xl font-bold mt-4 mb-2 text-center">Student Profile</h2>
+<h2 class="text-3xl font-medium m-4 text-center">Student Profile</h2>
 <form [formGroup]="detailsForm">
   <div class="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
     <div class="mb-4">
@@ -47,8 +47,9 @@
       <input  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       id="skills" type="text" placeholder="Skills" [readonly]="!editable" formControlName="skills">
     </div>
-    <div class="flex items-center justify-between">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" (click)="toggleEdit()">{{ editable ? 'Save' : 'Edit' }}</button>
+    <div class="flex flex-col items-center justify-between">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" (click)="toggleEdit()">{{ editable ? 'Save' : 'Edit' }}</button>
+      <a routerLink="/reset-password" class="text-purple-950 m-2">Change Password</a>
     </div>
   </div>
 </form>

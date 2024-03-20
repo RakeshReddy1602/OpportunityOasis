@@ -1,25 +1,44 @@
 <div class="min-h-screen">
     <app-header></app-header>
-    <!-- Iterate over the list of applications -->
-<div *ngFor="let application of myApplications" class="application border rounded-md p-4 mb-4 shadow-md">
-    <!-- Display application details -->
-    <div class="application-details mb-2">
-        <p><strong class="text-lg">{{ application.jobTitlle }}</strong></p>
-        <p><strong>Vendor Name:</strong> {{ application.vendorName }}</p>
-        <p><strong>Time:</strong> {{ application.time | date }}</p>
-        <p><strong>Status:</strong> {{ application.status }}</p>
-        <p><strong>Registration Number:</strong> {{ application.regNumber }}</p>
-    </div>
+    <div *ngIf="myApplications.length == 0">
+        <!-- no-posted-jobs.component.html -->
+        <div class="flex justify-center h-screen">
+            <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                <h1 class="text-2xl font-bold mb-4">No Posted Jobs Yet</h1>
+                <p class="text-gray-700 mb-4">It seems like you haven't posted any jobs yet or <span class="font-semibold"> students have not yet appplied to your job post</span>. If you have opportunities
+                    available, consider posting them now to start receiving applications.</p>
+              <div class="flex flex-col">
+                <a routerLink="/post-job" class="text-purple-900 m-2">Post Jobs now</a>
+                <a routerLink="/open-jobs" class="text-purple-900 m-2">Back to Open Jobs</a>
+              </div>
+            </div>
+        </div>
 
-    <!-- Buttons for accepting or rejecting the application -->
-    <div class="action-buttons flex justify-between items-center">
-        <button (click)="accept(application)" class="accept-button bg-green-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300">
-            Accept
-        </button>
-        <button (click)="reject(application)" class="reject-button bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
-            Reject
-        </button>
     </div>
-</div>
+    <!-- Iterate over the list of applications -->
+   <div *ngIf="myApplications.length > 0">
+    <div *ngFor="let application of myApplications" class="application border rounded-md p-4 mb-4 shadow-md">
+        <!-- Display application details -->
+        <div class="application-details mb-2">
+            <p><strong class="text-lg">{{ application.jobTitlle }}</strong></p>
+            <p><strong>Vendor Name:</strong> {{ application.vendorName }}</p>
+            <p><strong>Time:</strong> {{ application.time | date }}</p>
+            <p><strong>Status:</strong> {{ application.status }}</p>
+            <p><strong>Registration Number:</strong> {{ application.regNumber }}</p>
+        </div>
+
+        <!-- Buttons for accepting or rejecting the application -->
+        <div class="action-buttons flex justify-between items-center">
+            <button (click)="accept(application)"
+                class="accept-button bg-green-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300">
+                Accept
+            </button>
+            <button (click)="reject(application)"
+                class="reject-button bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
+                Reject
+            </button>
+        </div>
+    </div>
+   </div>
 
 </div>

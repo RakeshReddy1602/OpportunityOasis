@@ -1,19 +1,37 @@
-<div class="min-h-screen">
-    <app-header></app-header>
+<div class="min-h-screen content">
+    <app-header></app-header> 
 <!-- Iterate over the list of applications -->
-<div *ngFor="let application of myApplications" class="application bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-md p-6 mb-6">
-    <!-- Application details -->
-    <div class="flex items-center justify-between mb-4">
-        <div>
-            <h2 class="text-2xl font-semibold text-white">{{ application.jobTitlle }}</h2>
-            <p class="text-sm text-white">{{ application.vendorName }}</p>
-            <p class="text-sm text-white">Time: {{ application.time | date }}</p>
-            <p class="text-sm text-white">Registration Number: {{ application.regNumber }}</p>
-        </div>
-        <span class="text-sm text-white">{{ application.status }}</span>
+<div *ngIf="myApplications.length == 0">
+    <!-- application-processing.component.html -->
+<div class="flex  justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md text-center">
+        <h1 class="text-2xl font-bold mb-4">Applications in Process</h1>
+        <p class="text-gray-700 mb-4">It seems like your applications are still being processed. Meanwhile, you can continue to explore and apply for more opportunities.</p>
+        <a routerLink="/apply-jobs" class="text-purple-900">Apply for more jobs</a>
     </div>
+</div>
 
-   
+</div>
+<div *ngIf="myApplications.length > 0">
+    <h1 class="font-medium text-4xl text-center text-gray-950">Results</h1>
+    <div  *ngFor="let application of myApplications" class="application bg-gradient-to-r from-blue-800 via-blue-600 to-blue-500 rounded-lg shadow-md p-6 mx-2 mb-6">
+        <!-- Application details -->
+        <div class="flex items-center justify-between mb-4">
+            <div class="text-neutral-50">
+               <h2 class="text-2xl">Congratulations !!!</h2>
+               <p>We are pleased to inform that you have selected for the role <span class="font-semibold">{{application.jobTitlle}}</span>
+                at <span class="font-semibold">{{application.vendorName}}</span>
+               </p>
+               <p>Please contact your vendor at <br>{{findVendor(application.vendorId)!.mobile}} <br>or <br> 
+                {{findVendor(application.vendorId)?.email}} <br>for further processing.
+               </p>
+               <p>We wish you all the best for your future journey with {{application.vendorName}}</p>
+            </div>
+            <span class="text-sm text-white">{{ application.status }}</span>
+        </div>
+    
+       
+    </div>
 </div>
 
 </div>

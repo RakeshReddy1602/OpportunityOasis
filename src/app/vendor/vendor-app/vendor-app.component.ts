@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { application } from 'src/app/Application.interface';
 import { vendor } from 'src/app/Vendor.interface';
-
 @Component({
   selector: 'app-vendor-app',
   templateUrl: './vendor-app.component.html',
@@ -11,7 +10,10 @@ export class VendorAppComponent implements OnInit{
 
   applicationList : application[] = [];
   myApplications : application[] = [];
+  jobId:number = -1;
   vendor! : vendor;
+
+  constructor(){}
 
   ngOnInit(): void {
     
@@ -23,29 +25,45 @@ export class VendorAppComponent implements OnInit{
     if(storedVendor !== null){
       this.vendor = JSON.parse(storedVendor);
     }
-    this.getMyApplications();
+   let storedSharedId = localStorage.getItem('sharedJobId');
+   if(storedSharedId !== null){
+    this.jobId = JSON.parse(storedSharedId);
+   }
+    this.getMyApplications(this.jobId);
   }
 
-  getMyApplications(){
+  getMyApplications(jobId:number){
     this.applicationList.forEach((app)=>{
-      console.log(app.vendorId +" "+this.vendor.vendorId)
-      if(app.vendorId == this.vendor.vendorId && app.status == 'Pending'){
+      if(app.jobId == jobId && app.status == 'Pending'){
+        console.log("matched");
         this.myApplications.push(app);
       }
     })
   }
 
-  accept(appplication:application){
-   appplication.status = 'Accepted';
-   this.updateAppList();
+  accept(application:application){
+   application.status = 'Accepted';
+   this.updateAppList(application);
+   this.updateMyApplications();
   }
 
   reject(application:application){
     application.status = 'Rejected';
-    this.updateAppList();
+    this.updateAppList(application);
+    this.updateMyApplications();
   }
 
-  updateAppList(){
+  updateMyApplications(){
+    this.myApplications = this.myApplications.filter((app)=>{
+      return app.status == 'Pending';
+     })
+  }
+
+  updateAppList(application:application){
+    this.applicationList = this.applicationList.filter((app)=>{
+      return app != application;
+   });
+   this.applicationList.push(application);
     localStorage.setItem('applicationList',JSON.stringify(this.applicationList));
   }
 

@@ -1,31 +1,42 @@
 <div class="min-h-screen">
   <app-header></app-header>
+  <div *ngIf="myApplicationList.length == 0">
+    <!-- no-job-applications.component.html -->
+<div class="100 flex justify-center h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-md text-center">
+      <h1 class="text-2xl font-bold mb-4">Your Application List is Empty</h1>
+      <p class="text-gray-700 mb-4">Looks like you haven't applied for any jobs yet. Don't worry, you can start exploring and apply for new opportunities.</p>
+      <a routerLink="/apply-jobs" class="text-blue-900">Apply for Jobs</a>
+  </div>
+</div>
+
+  </div>
   <!-- list-applications.component.html -->
-<div class="max-w-6xl mx-auto py-6 px-4">
-  <h2 class="text-3xl font-bold mb-6">Applications</h2>
+<div *ngIf="myApplicationList.length > 0" class="max-w-6xl mx-auto py-6 px-4">
+  <h2 class="text-3xl font-medium mb-6 text-center">Your Applications</h2>
   
   <div class="overflow-x-auto">
     <table class="table-auto w-full border-collapse">
       <thead>
         <tr>
-          <th class="px-4 py-2 bg-gray-200 text-gray-600">Job ID</th>
-          <th class="px-4 py-2 bg-gray-200 text-gray-600">Job Title</th>
-          <th class="px-4 py-2 bg-gray-200 text-gray-600">Vendor Name</th>
-          <th class="px-4 py-2 bg-gray-200 text-gray-600">Time</th>
-          <th class="px-4 py-2 bg-gray-200 text-gray-600">Result</th>
+          <th class="px-4 py-2 text-gray-600">Job ID</th>
+          <th class="px-4 py-2 text-gray-600">Job Title</th>
+          <th class="px-4 py-2 text-gray-600">Vendor Name</th>
+          <th class="px-4 py-2 text-gray-600">Time</th>
+          <th class="px-4 py-2 text-gray-600">Result</th>
+          <th class="px-4 py-2 text-gray-600">Action</th>
         </tr>
       </thead>
       <tbody>
         <!-- Application rows -->
-        <tr *ngFor="let application of applicationList">
+        <tr *ngFor="let application of myApplicationList">
           <td class="border px-4 py-2">{{ application.jobId }}</td>
           <td class="border px-4 py-2">{{ application.jobTitlle }}</td>
           <td class="border px-4 py-2">{{ application.vendorName }}</td>
           <td class="border px-4 py-2">{{ application.time | date: 'medium' }}</td>
           <td class="border px-4 py-2">{{ application.status }}</td>
           <td class="border px-4 py-2">
-            <button class="p-2 bg-red-700 rounded" (click)="withdraw(application.jobId)"
-                    [disabled] = "canWithDraw(application.status)">
+            <button *ngIf="canWithDraw(application.status)" class="p-2 bg-orange-600 text-white rounded" (click)="withdraw(application.jobId)">
               Withdraw
             </button></td>
         </tr>

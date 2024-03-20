@@ -1,31 +1,36 @@
 <div class="min-h-screen">
   <app-header></app-header>
-  <div class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg">
+  <div class="mx-auto mt-2 p-6 bg-white shadow-md rounded-lg">
     <h2 class="text-3xl font-bold mb-8 text-center">Feedback</h2>
     
-    <form>
-      <div class="mb-6">
-        <label for="name" class="block text-gray-700 font-semibold mb-2">Your Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
-      </div>
-      
+    <form [formGroup]="feedbackForm" (ngSubmit)="submit()">
       <div class="mb-6">
         <label for="email" class="block text-gray-700 font-semibold mb-2">Your Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email address" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" formControlName="email"
+        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        <p *ngIf="feedbackForm!.touched && feedbackForm.get('email')!.invalid" class="warning">Please enter a valid email</p>
       </div>
       
       <div class="mb-6">
         <label for="subject" class="block text-gray-700 font-semibold mb-2">Subject:</label>
-        <input type="text" id="subject" name="subject" placeholder="Enter feedback subject" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+        <input type="text" id="subject" name="subject" placeholder="Enter feedback subject" formControlName="subject"
+        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        <p *ngIf="feedbackForm.get('subject')!.touched && feedbackForm.get('subject')!.invalid" class="warning">Subject is required and must have atleast 4 characters</p>
       </div>
       
       <div class="mb-6">
         <label for="message" class="block text-gray-700 font-semibold mb-2">Your Message:</label>
-        <textarea id="message" name="message" placeholder="Enter your feedback message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required></textarea>
+        <textarea id="message" name="message" placeholder="Enter your feedback message" rows="4" formControlName="message"
+        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+        <p *ngIf="feedbackForm.get('message')!.touched && feedbackForm.get('message')!.invalid" class="warning">Message is required and must have atleast 10 characters</p>
       </div>
       
-      <div class="mt-8">
-        <button type="submit" class="w-full bg-blue-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Submit Feedback</button>
+      <div class="mt-8 flex flex-col items-center">
+        <p class="warning m-2" *ngIf="feedbackForm.invalid">Fill the required fields in correct format</p>
+        <button type="submit"
+        class="w-fit bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+        [disabled]="feedbackForm.invalid"
+        >Submit Feedback</button>
       </div>
     </form>
   </div>
