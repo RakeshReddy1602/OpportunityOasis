@@ -23,7 +23,7 @@
               <button type="submit"  [disabled]="loginForm.invalid || isInvalidId()" [ngClass]="{'disabled' : loginForm.invalid,'enabled' :loginForm.valid}"
                class="w-full text-white font-bold py-2 px-4 rounded">Login</button>
             </form>
-            <p class="mb-4">Don't have an account? <a href="#" (click)="toggleForm()" class="text-purple-950">Register with us</a></p>
+            <p class="mb-4">Don't have an account? <a (click)="toggleForm()" class="text-purple-950">Register with us</a></p>
             <a routerLink="reset-password" class="text-red-600">Forgot password</a>
           </div>
       
