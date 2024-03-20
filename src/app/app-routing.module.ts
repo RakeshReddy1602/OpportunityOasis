@@ -21,7 +21,6 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
-  {path:'**',component:LoginComponent},
   {path:'login',component:LoginComponent},
   {path:'reg-student',component:RegStudentComponent},
   {path:'reg-vendor',component:RegVendorComponent},

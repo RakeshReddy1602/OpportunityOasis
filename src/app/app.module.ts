@@ -33,6 +33,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { OpenJobsComponent } from './vendor/open-jobs/open-jobs.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,6 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     MatInputModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }
