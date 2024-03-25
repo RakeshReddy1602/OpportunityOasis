@@ -52,8 +52,10 @@
       <p class="warning" *ngIf="detailsForm.get('email')!.touched && detailsForm.get('email')!.invalid" class="warning">Enter a valid email</p>
     </div>
     <div class="flex flex-col items-center justify-between">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" (click)="toggleEdit()">{{ editable ? 'Save' : 'Edit' }}</button>
-      <a routerLink="/reset-password" class="m-4 text-purple-700">Reset Password</a>
+<div class="flex">
+  <button class="nav" type="button" (click)="toggleEdit()">{{ editable ? 'Save' : 'Edit' }}</button>
+  <a class="nav" routerLink="/vendor-dashboard">Go to Dashbaord</a>
+</div>      <a routerLink="/reset-password" class="m-4 text-purple-700 font-medium text-md">Reset Password</a>
     </div>
   </div>
 </form>

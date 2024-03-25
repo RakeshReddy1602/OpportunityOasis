@@ -17,15 +17,13 @@ export class ResetPasswordComponent implements OnInit{
   studentList : student[] =[];
   vendorList : vendor[] = [];
   userExists : boolean = true;
-  invalidPass: boolean = false;
-  notMatch : boolean = false;
 
   constructor(private tservice:ToastService,private router:Router){}
 
   ngOnInit(): void {
       this.resetForm = new FormGroup({
         regNumber : new FormControl('',[Validators.required]),
-        entryPassword : new FormControl('',[Validators.required]),
+        entryPassword : new FormControl('',[Validators.required,Validators.pattern(this.passwordRegex)]),
         confirmPassword : new FormControl('',[Validators.required]),
       });
 
@@ -64,7 +62,8 @@ export class ResetPasswordComponent implements OnInit{
       this.userExists = false;
       return ;
     }
-   if(this.validPassword(entryPassword,confirmPassword)){
+    this.userExists = true;
+   if(this.isSamePassword()){
     this.studentList = this.studentList.filter((st)=>{
       st.regNumber != regNumber;
     });
@@ -86,7 +85,8 @@ export class ResetPasswordComponent implements OnInit{
       this.userExists = false;
       return ;
     }
-    if(this.validPassword(entryPassword,confirmPassword)){
+    this.userExists = true;
+    if(this.isSamePassword()){
      this.vendorList = this.vendorList.filter((v)=>{
        v.vendorId != vendorId;
      });
@@ -100,15 +100,8 @@ export class ResetPasswordComponent implements OnInit{
     }
   }
 
-  validPassword(ep:string,cp:string):boolean{
-    if(this.passwordRegex.test(ep)){
-      if(cp == ep){
-        return true;
-      }
-      else{
-        this.notMatch = true;
-      }
+
+    isSamePassword() : boolean{
+      return this.resetForm.get('entryPassword')?.value === this.resetForm.get('confirmPassword')?.value;
     }
-    return this.invalidPass = false;
-  }
 }

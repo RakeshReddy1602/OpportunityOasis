@@ -29,7 +29,7 @@ export class PostJobComponent implements OnInit{
       duration : new FormControl(0,[Validators.required,Validators.min(1)]),
       skills : new FormControl('',[Validators.required]),
       salary: new FormControl(0,[Validators.required,Validators.min(0)]),
-      startTime : new FormControl('',[Validators.required])
+      startTime : new FormControl('12:00',[Validators.required])
     })
 
     let storedJobList = localStorage.getItem('jobList');

@@ -14,7 +14,6 @@
       id="regNumber" type="number" placeholder="Enter registration number"
       formControlName="regNumber">
       <p *ngIf="studentExist" class="warning">Student with registration Number already exists</p>
-      <p>{{registerForm.get('regNumber')?.invalid}}</p>
       <p *ngIf="registerForm!.touched && registerForm.get('regNumber')!.invalid" class="warning">Registration Number must be of 8 numbers</p>
     </div>
     <div class="mb-4">
@@ -83,13 +82,16 @@
     </div>
     <div class="flex flex-col items-center justify-between">
       <p *ngIf="registerForm.touched && registerForm.invalid" class="warning">Fill the form with correct details</p>
+      <p *ngIf="studentExist" class="warning">Student with registration number already exists</p>
       <button class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
       type="submit"
-      [disabled]="registerForm.invalid || passwordNotMatch()" [ngClass]="{'disabled' : registerForm.invalid,'enabled' :registerForm.valid}">
+      [disabled]="registerForm.invalid || passwordNotMatch()" [ngClass]="{'disabled' : registerForm.invalid || passwordNotMatch(),'enabled' :registerForm.valid && !passwordNotMatch()}">
         Register
       </button>
     </div>
   </form>
 </div>
-
+</div>
+<div>
+ {{passwordNotMatch()}}
 </div>

@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit{
   toggleForm(){
     this.showLoginForm = !this.showLoginForm;
   }
+  
   login(){
     let id = this.loginForm.get('regNumber')!.value;
     let password = this.loginForm.get('password')!.value;

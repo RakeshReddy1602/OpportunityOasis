@@ -26,7 +26,7 @@
       <p class=" mb-4">Preferred Skills: {{ job.skills }}</p>
       <p class=" mb-4">Start Time: {{ job.startTime }}</p>
       <p class=" mb-2">Duration(in hours): {{ job.duration }}</p>
-      <p class=" mb-4">Salary: {{ job.salary }}</p>
+      <p class=" mb-4">Salary: ₹ {{ job.salary }}</p>
      <div *ngIf="!alraedyApplied(job.id)">
       <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       (click)="updateApplications(job)"

@@ -42,7 +42,7 @@ export class AppComponent implements OnInit{
     }
     let storedJobId = localStorage.getItem('jobId');
     if(storedJobId == null){
-      localStorage.setItem('jobId','003');
+      localStorage.setItem('jobId','1000');
     }
     let storedStudent = localStorage.getItem('vendorId');
     if(storedStudent == null){

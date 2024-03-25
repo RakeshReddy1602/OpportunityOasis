@@ -1,0 +1,12 @@
+.nav{
+    background-color: rgb(32, 171, 221);
+    margin: 1rem;
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+    color: white;
+    font-weight: 500;
+}
+
+.nav:hover{
+    background-color: rgb(3, 107, 198);
+}

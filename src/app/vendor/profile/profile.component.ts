@@ -59,8 +59,10 @@ export class ProfileComponent implements OnInit{
         this.vendorList = this.vendorList.filter((v)=>{
           return v.vendorId != vendorId;
         })
-        this.vendorList.push({vendorId:vendorId,businessName:shopName,businessAddress:shopAddress,email:email,mobile:mobile,name:name,password:password});
+        let updatedVendor = {vendorId:vendorId,businessName:shopName,businessAddress:shopAddress,email:email,mobile:mobile,name:name,password:password}
+        this.vendorList.push(updatedVendor);
         localStorage.setItem('vendorList',JSON.stringify(this.vendorList));
+        localStorage.setItem('vendor',JSON.stringify(updatedVendor));
 
       }
     })
